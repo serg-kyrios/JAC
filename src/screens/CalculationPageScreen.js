@@ -1,11 +1,9 @@
-//import React from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
-//import { Button } from "@react-navigation/elements";
 import { useNavigation } from "@react-navigation/native";
 
 import React, { useState, useEffect } from "react";
-// import { View, Text, TextInput, Button } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import clearData from "../components/ClearData";
 
 const CalculationPageScreen = () => {
   const [km, setKm] = useState("");
@@ -20,6 +18,12 @@ const CalculationPageScreen = () => {
   const saveData = async () => {
     try {
       const newEntry = { km, fuel, date: new Date().toLocaleString() };
+      // const newEntry = {
+      //   km,
+      //   fuel,
+      //   date: new Date().toISOString().split("T")[0], // YYYY-MM-DD
+      // };
+
       const storedData = await AsyncStorage.getItem("fuelRecords");
       const records = storedData ? JSON.parse(storedData) : [];
       records.push(newEntry);
@@ -43,12 +47,11 @@ const CalculationPageScreen = () => {
       console.error("Помилка завантаження даних", error);
     }
   };
-
   // Очищення всіх записів (наприклад, для тестів)
-  const clearData = async () => {
-    await AsyncStorage.removeItem("fuelRecords");
-    setHistory([]);
-  };
+  // const clearData = async () => {
+  //   await AsyncStorage.removeItem("fuelRecords");
+  //   setHistory([]);
+  // };
 
   return (
     <View style={{ padding: 20 }}>
@@ -68,7 +71,12 @@ const CalculationPageScreen = () => {
         style={{ borderWidth: 1, marginBottom: 10, padding: 5 }}
       />
       <Button title="Зберегти" onPress={saveData} />
-      <Button title="Очистити історію" onPress={clearData} color="red" />
+      {/* <Button title="Очистити історію" onPress={clearData} color="red" /> */}
+      <Button
+        title="Очистити історію"
+        onPress={() => clearData(setHistory)}
+        color="red"
+      />
 
       <Text style={{ marginTop: 20 }}>Історія поїздок:</Text>
       {history.map((item, index) => (
