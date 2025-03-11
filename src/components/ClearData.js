@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const clearData = (setHistory) => {
+export const clearData = (setHistory) => {
   Alert.alert("Підтвердження", "Ви впевнені, що хочете видалити всі записи?", [
     { text: "Скасувати", style: "cancel" },
     {
@@ -14,5 +14,3 @@ const clearData = (setHistory) => {
     },
   ]);
 };
-
-export default clearData;

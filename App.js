@@ -5,6 +5,7 @@ import CalculationPageScreen from "./src/screens/CalculationPageScreen";
 //import NavigationScreen from "./src/navigation/NavigationScreen";
 import MyTabs from "./src/navigation/NavigationScreen";
 import { View, Text, StyleSheet } from "react-native";
+//import sampler from "./__tests__/Sampler";
 // Заглушка для HomeScreen (або імпортуй його)
 
 export default function App() {

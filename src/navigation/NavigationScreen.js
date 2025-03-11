@@ -1,14 +1,21 @@
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Text } from "@react-navigation/elements";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CalculationPageScreen from "../screens/CalculationPageScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
+import Sampler from "../components/Sampler";
 
 // Об'єкт з іконками для вкладок
 const icons = {
   Home: "home",
   CalculationPage: "calculator",
+  Settings: "cog",
 };
 
 // Додаємо Tab Navigator
@@ -18,7 +25,21 @@ const Tab = createBottomTabNavigator();
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <ImageBackground
+        source={require("../../assets/images/A white JAC S3 NEW compact SUV.jpg")}
+        style={styles.background}
+        resizeMode="cover" // або , , contain"""stretch""repeat"
+        //opacity={0.5} // Прозорість фону
+        borderRadius={10} // Радіус заокруглення
+        borderWidth={2} // Товщина рамки
+        borderColor="red" // Колір рамки
+        borderStyle="dashed" // Стиль рамки
+      >
+        <View style={styles.overlay}>
+          <Text style={styles.text}>Привіт, світ!</Text>
+        </View>
+        <Text>Home Screen</Text>
+      </ImageBackground>
     </View>
   );
 }
@@ -88,8 +109,9 @@ function MyTabBar({ state, descriptors, navigation }) {
 function MyTabs() {
   return (
     <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen ImageBackground name="Home" component={HomeScreen} />
       <Tab.Screen name="CalculationPage" component={CalculationPageScreen} />
+      <Tab.Screen name="Settings" component={Sampler} />
     </Tab.Navigator>
   );
 }
@@ -97,9 +119,20 @@ function MyTabs() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+  },
+  background: {
+    flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Напівпрозорий чорний фон
+    padding: 20,
+    borderRadius: 10,
+  },
+  text: {
+    color: "white",
+    fontSize: 24,
   },
 });
 
